@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Special ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    background:radial-gradient(circle at top,#ff6a88,#ff0844);
+    font-family:Segoe UI, Arial;
+    color:white;
+    text-align:center;
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    font-size:20px;
+    animation:float 6s linear infinite;
+    opacity:0.8;
+}
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+
+.container{
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:2;
+}
+
+h1{
+    font-size:38px;
+    text-shadow:0 0 15px #fff;
+}
+
+.btn{
+    padding:14px 36px;
+    margin:15px;
+    font-size:20px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(45deg,#ff4e50,#f9d423);
+    box-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
+/* NO button */
+#no{
+    position:absolute;
+}
+
+/* video */
+video{
+    display:none;
+    width:90%;
+    max-width:600px;
+    border-radius:20px;
+    box-shadow:0 0 30px #fff;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+/* create hearts */
+for(let i=0;i<40;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(15+Math.random()*25)+"px";
+    h.style.animationDuration=(4+Math.random()*4)+"s";
+    document.body.appendChild(h);
+}
+</script>
+
+<div class="container">
+    <h1 id="title">Will you be my Valentine? 💘</h1>
+
+    <button class="btn" id="yes">YES ❤️</button>
+    <button class="btn" id="no">NO 💔</button>
+
+    <video id="video" controls playsinline>
+        <source src="meme.mp4" type="video/mp4">
+    </video>
+</div>
+
+<script>
+/* YES button */
+document.getElementById("yes").onclick = playMeme;
+
+/* NO button escape */
+const noBtn = document.getElementById("no");
+noBtn.onmouseover = () => {
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+};
+
+function playMeme(){
+    document.getElementById("title").style.display="none";
+    document.getElementById("yes").style.display="none";
+    noBtn.style.display="none";
+
+    let v=document.getElementById("video");
+    v.style.display="block";
+    v.muted=false;
+    v.volume=1.0;
+    v.play().catch(()=>alert("Tap ▶️ once for sound"));
+}
+</script>
+
+</body>
+</html>
